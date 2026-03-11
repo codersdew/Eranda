@@ -3304,7 +3304,7 @@ socket.ev.on('creds.update', async () => {
 ╭──╯│      │╭──╯╞──╮
 ╰──╯╰──╯╰──╯╰──╯
 ╭━━━━━━━━━━━━━━━━╮
-┃ 📱 *ɴᴜᴍʙᴇʀ :* ${sanitizedNumber}
+┃ 📱 
 ┃ 🚀 *ꜱᴛᴀᴛᴜꜱ :* ACTIVE PAKAYO
 ┃ ⏰ *ᴛɪᴍᴇ :* ${getSriLankaTimestamp()}
 ┃ 💎 *ᴏᴡɴᴇʀ :* _*KEZU || ERANDA*_
