@@ -2534,7 +2534,7 @@ _©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬  ${botName}_
 
 case 'owner': {
     const owner1 = {
-        number: ;+94760494354',
+        number: '94760494354',
         name: '𝐄ʀᴀɴᴅᴀ 𝐋ᴀᴋꜱʜᴀɴ',
         org: 'OWNER & FUNDER ⚜'
     };
