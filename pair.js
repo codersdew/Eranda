@@ -2907,7 +2907,7 @@ case 'jid': {
 case 'setbotname': {
   const sanitized = (number || '').replace(/[^0-9]/g, '');
   const senderNum = (nowsender || '').split('@')[0];
-  const ownerNum = config.OWNER_NUMBER.replace(/[^0-+94760494354]/g, '');
+  const ownerNum = config.OWNER_NUMBER.replace(/[^0-9]/g, '');
   if (senderNum !== sanitized && senderNum !== ownerNum) {
     const shonux = {
       key: { remoteJid: "status@broadcast", participant: "0@s.whatsapp.net", fromMe: false, id: "META_AI_SETBOTNAME1" },
