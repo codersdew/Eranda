@@ -36,7 +36,7 @@ const pairCodeLimiter = rateLimit({
 app.use('/code', pairCodeLimiter, code);
 
 app.get("/pair", (req, res) =>
-  res.sendFile(__path + "/frontend/pair.html"),
+  res.sendFile(__path + "/pair.html"),
 );
 
 app.listen(PORT, () => {
