@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERA MD MINI BOT</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+<style>
+/* CSS ආරම්භය */
+:root {
+  --primary: #ff007b; /* මූලික පැහැය (Pink/Purple) */
+  --secondary: #00f2ff; /* දෙවන පැහැය (Cyan) */
+  --bg-dark: #0a0a0a; /* තද කළු පසුබිම */
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  height:100vh;
+  background-color: var(--bg-dark);
+  overflow:hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Video */
+video.bg-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+  opacity: 0.5; /* වීඩියෝවේ දීප්තිය අඩු කිරීමට */
+}
+
+/* Main Box */
+.box{
+  width:360px;
+  padding:30px;
+  background: #111; /* Solid Background - No Glass Effect */
+  border: 2px solid var(--primary);
+  border-radius: 25px;
+  text-align:center;
+  position:relative;
+  box-shadow: 0 0 20px rgba(255, 0, 123, 0.4);
+}
+
+/* Logo Styling */
+.logo-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--secondary);
+  margin-bottom: 15px;
+  padding: 5px;
+  box-shadow: 0 0 15px var(--secondary);
+}
+
+.rgb-text{
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 0 10px var(--primary);
+  margin-bottom: 5px;
+}
+
+h6{
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Input Styles */
+.input-container{
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-container input{
+  width:100%;
+  height:50px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  color: white;
+  padding: 0 15px;
+  font-size: 16px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.input-container input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 10px var(--secondary);
+  outline: none;
+}
+
+/* Submit Button */
+#submit {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+#submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
+}
+
+/* Pair Code Display Area */
+#pair {
+  margin-top: 20px;
+}
+
+.code-box {
+  background: #000;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px dashed var(--secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.code-text {
+  font-size: 22px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+/* Copy Button */
+.copy-btn {
+  background: var(--secondary);
+  color: #000;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.copy-btn:active {
+  transform: scale(0.9);
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--primary);
+  z-index: 100;
+}
+
+</style>
+</head>
+
+<body>
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="https://files.catbox.moe/dlcamg.mp4" type="video/mp4">
+</video>
+
+<div class="box">
+    <img src="https://files.catbox.moe/kg5xo0.jpg" alt="Logo" class="logo-img">
+
+    <div class="rgb-text">𝐄𝐑𝐀 𝐌𝐃 𝐌𝐈𝐌𝐈</div>
+    <h6>Developed by Eranda</h6>
+
+    <div class="input-container">
+      <input type="number" id="number" placeholder="9476xxxxxxx">
+    </div>
+
+    <button id="submit">Get Pairing Code</button>
+
+    <div id="pair">
+       </div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://files.catbox.moe/zko0jc.mp3" type="audio/mp3">
+</audio>
+
+<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
+  <i class="fas fa-play"></i>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+
+<script>
+let a = document.getElementById("pair");
+let b = document.getElementById("submit");
+let c = document.getElementById("number");
+let music = document.getElementById("bgMusic");
+let musicBtn = document.getElementById("musicBtn");
+let started = false;
+
+// Music Logic
+function toggleMusic(){
+  if(music.paused){
+    music.play();
+    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  }else{
+    music.pause();
+    musicBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+
+// Copy Function
+async function copyCode(code) {
+  try {
+    await navigator.clipboard.writeText(code);
+    const btn = document.querySelector('.copy-btn');
+    btn.innerText = "COPIED!";
+    btn.style.background = "#00ff00";
+    setTimeout(() => {
+      btn.innerText = "COPY CODE";
+      btn.style.background = "var(--secondary)";
+    }, 2000);
+  } catch (err) {
+    alert("Failed to copy");
+  }
+}
+
+b.addEventListener("click", async (e) => {
+  e.preventDefault();
+  if(!c.value){
+    a.innerHTML = '<span style="color:#ff4444">Enter number first!</span>';
+    return;
+  }
+  
+  let number = c.value.replace(/[^0-9]/g, "");
+  if(number.length < 10){
+    a.innerHTML = '<span style="color:#ff4444">Invalid Number!</span>';
+    return;
+  }
+
+  a.innerHTML = '<div style="color:white"><i class="fas fa-spinner fa-spin"></i> Generating...</div>';
+  
+  try {
+    let { data } = await axios(`/code?number=${number}`);
+    let code = data.code || "ERROR";
+    
+    a.innerHTML = `
+      <div class="code-box">
+        <span style="color:var(--secondary); font-size:12px;">YOUR PAIRING CODE:</span>
+        <div class="code-text">${code}</div>
+        <button class="copy-btn" onclick="copyCode('${code}')">COPY CODE</button>
+      </div>
+    `;
+  } catch (e) {
+    a.innerHTML = '<span style="color:red">Server Error! Try again.</span>';
+  }
+});
+
+// Auto play music on first click
+document.body.addEventListener("click", () => {
+  if(!started){
+    music.play();
+    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    started = true;
+  }
+}, {once: true});
+</script>
+
+</body>
+</html>
